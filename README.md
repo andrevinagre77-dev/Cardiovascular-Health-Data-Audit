@@ -1,29 +1,15 @@
 # Cardiovascular Biometrics: A Systematic Data Audit & Inferential Analysis
 
-## 1. Executive Summary
-This technical audit targets a dataset of 1,000 patient records to validate data integrity and assess the impact of lifestyle interventions on cardiovascular performance. The analysis identifies critical biometric inconsistencies and employs a frequentist statistical approach to test hypothesis significance.
+### Executive Summary
 
-## 2. Data Integrity & Risk Mitigation (GIGO Prevention)
-A preliminary audit revealed structural flaws in the source data that would lead to "Garbage In, Garbage Out" (GIGO) scenarios.
+I was given a dataset of 1,000 patient records to understand one simple but critical question: **Do lifestyle changes actually improve cardiovascular health, or are we just seeing noise in the data?**
 
-* **Audit of Faulty BMI**: The original `BMI` column exhibited mathematical drift. I implemented a recovery field `BMI_Real` derived from raw `Weight_kg` and `Height_cm`.
-* **Structural Deconstruction**: The `Blood_Pressure` string variable was parsed into `Systolic` and `Diastolic` integers, enabling granular clinical risk profiling.
-* **Validation Metric**: A Pearson correlation matrix confirms the audit's success, showing a robust **0.82** correlation between weight and the corrected BMI.
+Coming from 26 years working with human behavior and addiction patterns, I knew that numbers alone don’t tell the full story. So I started where I always start — by checking if the data was trustworthy.
 
+I discovered that the original BMI column was mathematically incorrect. I rebuilt it from the raw weight and height, and split the blood pressure field into systolic and diastolic values. Only after cleaning the foundation did I run the analysis.
 
+Using a two-sample T-test, I compared heart rate between physically active and sedentary patients. The result was clear: **there was no statistically significant difference** (p-value = 0.4614).
 
-## 3. Inferential Framework & Hypothesis Testing
-The core objective was to determine if physical activity levels significantly shift the biometric mean of heart rate.
+This wasn’t a failure. It was a powerful insight: cardiovascular health in this population is influenced by many more factors than just physical activity — something my years of behavioral experience already suspected.
 
-* **Statistical Methodology**: Two-sample Student's T-test.
-* **Null Hypothesis ($H_0$)**: No significant difference exists in heart rate between active and sedentary cohorts.
-* **The Verdict**: Computed **P-Value = 0.4614**.
-* **Strategic Insight**: We **fail to reject the null hypothesis**. The variance is not statistically significant, proving that cardiovascular health in this cohort is a **multifactorial system**.
-
-## 4. Technical Stack
-* **Environment**: JupyterLab.
-* **Language**: Python 3.10+.
-* **Libraries**: Pandas (Auditing), Seaborn/Matplotlib (Visualization), Scipy.stats (Inferential Analysis).
-
----
-*Audit performed by André Vinagre.*
+**Technical Stack:** Python (Pandas), SciPy, Seaborn, JupyterLab
